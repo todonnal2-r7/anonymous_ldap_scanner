@@ -1,7 +1,7 @@
 # anonymous_ldap_scanner
 A tool to check LDAP services for anonymous bind and directory readability
 
-usage: anonymous-ldap-scan.py [-h] --server SERVER --port PORT --ssl SSL
+usage: python anonymous-ldap-scan.py [-h] --server SERVER --port PORT --ssl SSL
 
 options:
 

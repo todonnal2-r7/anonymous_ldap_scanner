@@ -16,4 +16,4 @@ options:
 NOTE:
    To check a list of servers, place the IP addresses in a file, one IP per line and run the tool like this:
      
-          for i in $(cat <filename>); do python anonymous_ldap_scanner.py --server $i --port <port> --ssl <True or False>
+       for i in $(cat <filename>); do python anonymous_ldap_scanner.py --server $i --port <port> --ssl <True or False>

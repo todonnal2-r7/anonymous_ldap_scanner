@@ -19,15 +19,17 @@ else:
 
 server = ldap3.Server(ldap_server, get_info=ldap3.ALL, port=port, use_ssl=ssl, connect_timeout=3)
 connection=ldap3.Connection(server)
-
-if (connection.bind()):
-        print(colored("[*] Anonymous Bind Successful! " + ldap_server, "green"))
-        server_info = json.loads(server.info.to_json())
-        naming_context = server_info['raw']['defaultNamingContext']
-        print("Default naming context = " + naming_context[0])
-        if (connection.search(naming_context[0], '(objectclass=*)')):
-                print(colored("[*] Directory contents readable!\n", "green"))
+try:
+        if (connection.bind()):
+                print(colored("[*] Anonymous Bind Successful! " + ldap_server, "green"))
+                server_info = json.loads(server.info.to_json())
+                naming_context = server_info['raw']['defaultNamingContext']
+                print("     Default naming context = " + naming_context[0])
+                if (connection.search(naming_context[0], '(objectclass=*)')):
+                        print(colored("     [*] Directory contents readable!\n", "green"))
+                else:
+                        print(colored("     [-] Directory not readable\n", "red"))
         else:
-                print(colored("[-] Directory not readable\n", "red"))
-else:
-        print(colored("[-] Anonymous Bind Failed." + ldap_server + "\n", "red"))
+                print(colored("     [-] Anonymous Bind Failed." + ldap_server + "\n", "red"))
+except:
+        print(colored("[X] Error connecting to " + ldap_server + "\n", "red"))
